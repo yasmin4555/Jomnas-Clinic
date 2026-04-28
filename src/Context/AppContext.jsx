@@ -1,6 +1,7 @@
 import React, { createContext, useState } from "react";
 import { assets } from "../assets/assets";
 
+
 // Create the context
 export const AppContext = createContext();
 
@@ -70,6 +71,8 @@ export const AppContextProvider = (props) => {
   return (
     <AppContext.Provider value={value}>
       {props.children}
+     
     </AppContext.Provider>
   );
 };
+export default AppContext;

@@ -1,30 +1,33 @@
-import React, { useContext } from "react";
-import { useNavigate } from "react-router-dom";
-import "./Top doctors.css";
+import React ,{useContext ,useEffect,useState}from "react";
 import { AppContext } from "../Context/AppContext";
 import { assets } from "../assets/assets";
+import { useNavigate } from "react-router-dom";
 
-const TopDoctors = () => {
-  const { Doctors } = useContext(AppContext); // Fetch doctors from context
-  const navigate = useNavigate(); // For navigation
+const RelatedDoctors=({Speciality,docid})=> {
+const navigate=useNavigate();
+const {Doctors}=useContext(AppContext);
+const [relDoc,setRelDocs]=useState([]);
 
-  // Check if Doctors data is available
-  if (!Doctors || Doctors.length === 0) {
-    return <p className="no-doctors-message">No doctors found. Please try again later.</p>;
-  }
+useEffect(()=> {
+if(Doctors.length> 0 &&Speciality){
+    const DoctorsData=Doctors.filter((doc)=>doc.Speciality===Speciality&&doc._id !==docid)
+    setRelDocs(DoctorsData)
+}
 
-  return (
-    <div className="top-doctors-container">
+},[Doctors,Speciality,docid])
+
+return(
+    <div>
+ <div className="top-doctors-container">
       <h2 className="heading">Top Doctors</h2>
       <div className="doctors-row">
-        {Doctors.slice(0, 4).
-map((doctor) => (
+        {relDoc.slice(0, 3).map((doctor) => (
           <div
             key={doctor.docid} // Use docid as the key
 
             className="doctor-card cursor-pointer"
 
-            onClick={() => navigate(`/Appointment/doc/${doctor.docid}`)}
+            onClick={() => navigate(`/Appointment/${doctor.docid}`)}
 
  // Navigate to Appointment page
           >
@@ -49,7 +52,7 @@ map((doctor) => (
         ))}
       </div>
     </div>
-  );
-};
-
-export default TopDoctors;
+    </div>
+)
+}
+export default RelatedDoctors;

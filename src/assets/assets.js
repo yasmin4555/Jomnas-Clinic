@@ -7,7 +7,7 @@ import logo from "./logo.jpg";
 import arrow_icon from './arrow_icon.svg';
 import dropdown_icon from './dropdown_icon.svg';
 import header from "./R.jpg";
-import profile from"./profile.png";
+import profile from"./profile.jpg";
 import Header from"./header.jpg";
 import groupimage from "./group image.jpg";
 import Dermatologist from"./download (4).jpg";
@@ -21,8 +21,10 @@ import doctors from"./doctors.png";
 import Aboutus from"./aboutt.jpg";
 import Contactus from"./Contact us.jpg";
 import dr from"./dr.webp";
+
 export const assets = {
     Image,
+  
     Contactus,
     OIP26,
    Myprofile,

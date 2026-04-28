@@ -19,26 +19,38 @@ const About= () => {
     autoplaySpeed: 3000,
 };
     return(
-   <div className="Aboutus">
-    <h1>About Our Clinic</h1>
-    <div className="Aboutus-container"></div>
-    <p>Welcome to our Clinic !</p>
-  <p>Our Clinic You can find yourself Comfortable,
+   <div >
+   <div className="text-center text-2xl pt-10 text-gray-500">
+   <p>ABOUT<span className="text-black-700 font-semibold">US</span></p>
+  
+   
+    </div>
+    <div className="Aboutus-container">
+      <div>
+    <p className="font-semibold text-mr-left">In Our Clinic You can find yourself Comfortable,
     We have also Top doctors in dermatology and in internal medicine and in plastic surgery,
-    with the most new latest professional devices, 
+    with the most new latest professional devices,
     the clinic is managed by Dr Jomna Atta Dermatology specialist.
   </p>
-<img src={assets.Aboutus} className="about-image"  >
-</img>
+    </div>
+
+    <div>
+<img src={assets.Aboutus} className="about-image"  />
+
+</div>
+
+ 
 <br></br>
 <br></br>
             <h2>Our Services</h2>
+            <div>
             <ul>
                 <li>Hydra facial</li>
                 <li>Filler and Botox</li>
                 <li>Plastic surgery</li>
                 <li>Internal examination</li>
             </ul>
+            </div>
 
             <br></br>
             <br></br>
@@ -65,6 +77,7 @@ const About= () => {
                     </div>
               </Slider>
 
+   </div>
    </div>
    
     )

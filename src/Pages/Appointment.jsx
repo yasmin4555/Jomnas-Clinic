@@ -1,8 +1,8 @@
 import React, { useContext, useEffect, useState } from "react";
-import { useParams } from "react-router-dom";
+import {  useNavigate, useParams } from "react-router-dom";
 import { AppContext } from "../Context/AppContext";
 import { assets } from "../assets/assets";
-
+import RelatedDoctors from "../components/RelatedDoctors";
 const Appointment = () => {
   const { docid } = useParams();
   const { Doctors, currencySymbol } = useContext(AppContext);
@@ -11,7 +11,7 @@ const Appointment = () => {
   const [slotIndex, setSlotIndex] = useState(0);
   const [slotTime, setSlotTime] = useState(null);
   const [loading, setLoading] = useState(true);
-
+const navigate=useNavigate();
   const daysOfWeek = ["SUN", "MON", "TUE", "WED", "THU", "FRI", "SAT"];
 
   const fetchDataInfo = async () => {
@@ -126,8 +126,13 @@ useEffect (() => {
                 </p>
               ))}
           </div>
-          <button className="mt-4 px-6 py-2 bg-primary text-white rounded-lg">Book an Appointment</button>
+          <button className="mt-4 px-6 py-2 bg-primary text-white rounded-lg" onClick={() => navigate(`/payment/${docid}`)}
+>
+  Book an Appointment</button>
+  
         </div>
+        {}
+        <RelatedDoctors docid={docid}  Speciality={docInfo .Speciality}/>
       </div>
     )
   );

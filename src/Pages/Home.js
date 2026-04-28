@@ -10,9 +10,7 @@ const Home = () => {
       <Header/>
       <SpecialityMenu/>
       <TopDoctors/>
-      
 
-   
     </div>
 
       );

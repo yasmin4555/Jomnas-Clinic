@@ -25,23 +25,29 @@ const Doctors = () => {
       }
     } else {
       console.warn("Doctors data is empty or not loaded.");
-      // Fallback: Use mock data or an empty array
-      setFilterDoc([]);
+      setFilterDoc([]); // Fallback: Set to empty array
     }
   }, [Doctors, Speciality]);
 
   return (
     <div className="p-6">
-      <h1 className="text-2xl font-semibold text-gray-800">
-        Browse through the doctors
-      </h1>
-      <p className="text-gray-600 mt-2">Find specialists and book appointments.</p>
+      <p className="text-2xl font-semibold text-gray-800">
+       <span className="text-center">Browse through the doctors</span> 
+      </p>
+     
+     <div className="flex flex-col sm:flex-row items-start gap-5 mt-5">
+      <p onClick={()=>Speciality==="Dermatologist"?navigate('/Doctors'):navigate('/ Doctors/')} className={'w-[94vw] sm:w-auto pl-3 py-1.5 pr-16 border border-gray-300 rounded transition-all cursor-pointer'}>Dermatologist </p>
+      <p onClick={()=>Speciality==="Internal medicine"?navigate('/Doctors'):navigate(' /Doctors/')}className={'w-[94vw] sm:w-auto pl-3 py-1.5 pr-16 border border-gray-300 rounded transition-all cursor-pointer'}>Internal Medicine </p>
+      <p onClick={()=>Speciality==="Plastic surgeon"?navigate('/Doctors'):navigate('/ Doctors/')}className={'w-[94vw] sm:w-auto pl-3 py-1.5 pr-16 border border-gray-300 rounded transition-all cursor-pointer'}>Plastic Surgeon </p>
+      <p className="text-gray-600 mt-2">
+        Find specialists and book appointments.
+      </p>
       <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 mt-5">
-        {filterDoc.length > 0 ? (
+        {filterDoc.length > 0? (
           filterDoc.map((doctor) => (
             <div
               key={doctor.docid}
-              onClick={() => navigate(`/Appointment/${doctor.docid}`)}
+              onClick={() => navigate(`/Appointment/doc/${doctor.docid}`)}
               className="flex flex-col items-center text-center border p-4 rounded shadow-md transition-all hover:shadow-lg cursor-pointer"
             >
               <div className="mb-4">
@@ -51,11 +57,22 @@ const Doctors = () => {
                   className="w-24 h-24 rounded-full object-cover"
                 />
               </div>
-              <p className="font-semibold text-lg">{doctor.name || "N/A"}</p>
-              <p className="text-gray-500">{doctor.Speciality || "General Practitioner"}</p>
-              <button className="mt-3 px-4 py-2 bg-primary text-white rounded">
+              <p className="font-semibold text-lg">
+                {doctor.name || "N/A"}
+              </p>
+              <p className="text-gray-500">
+                {doctor.speciality || "General Practitioner"}
+              </p>
+              <button
+                onClick={(e) => {
+                  e.stopPropagation(); // Prevent parent div click event
+                  navigate(`/Appointment/doc/${doctor.docid}`);
+                }}
+                className="mt-3 px-4 py-2 bg-primary text-white rounded"
+              >
                 View Profile
               </button>
+          
             </div>
           ))
         ) : (
@@ -63,7 +80,8 @@ const Doctors = () => {
             No doctors found. Please try again later.
           </p>
         )}
-      </div>
+     </div>
+    </div>
     </div>
   );
 };

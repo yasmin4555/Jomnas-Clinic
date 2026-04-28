@@ -30,11 +30,12 @@ const Header = () => {
 
         {/* Button */}
         <a
-          href="#Speciality"
-          className="mt-6 bg-white text-blue py-2 px-1 rounded-md shadow-md hover:bg-gray-100 hover:scale-105 transition-transform duration-300 ease-in-out"
-        >
-          Book Appointment
-        </a>
+  href="#Speciality"
+  className="mt-6 bg-white text-blue py-2 px-1 rounded-md shadow-md hover:bg-gray-100 hover:scale-105 transition-transform duration-300 ease-in-out"
+>
+  Book Appointment
+</a>
+
 
 </div>
 
