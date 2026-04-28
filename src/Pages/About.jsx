@@ -72,7 +72,7 @@ const About= () => {
                     </div>
 
                     <div>
-                <img src ={Slide5}  className='about-us-Slider'  alt=""/>
+                <img src ={Slide5}  className='about-us-Slider'  alt="Slide 5"/>
 
                     </div>
               </Slider>
