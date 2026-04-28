@@ -35,7 +35,7 @@ const About= () => {
     </div>
 
     <div>
-<img src={assets.Aboutus} className="about-image"  />
+<img src={assets.Aboutus} className="about-image" alt=""  />
 
 </div>
 
@@ -57,22 +57,22 @@ const About= () => {
             <br></br>
 <Slider {...settings} className="about-us-slider">
               <div>
-                <img src={Slide2} className='about-us-Slider' />
+                <img src={Slide2} className='about-us-Slider' alt="Slide 2" />
 
 
                 </div>
                 <div>
-                  <img src ={Slide3}  className='about-us-Slider' />
+                  <img src ={Slide3}  className='about-us-Slider' alt="Slide 3" />
 
                   </div>
 
               <div>
-                <img src ={Slide4}  className='about-us-Slider' />
+                <img src ={Slide4}  className='about-us-Slider' alt="Slide 4" />
 
                     </div>
 
                     <div>
-                <img src ={Slide5}  className='about-us-Slider' />
+                <img src ={Slide5}  className='about-us-Slider'  alt=""/>
 
                     </div>
               </Slider>
