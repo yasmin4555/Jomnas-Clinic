@@ -23,7 +23,7 @@ const Navbar = () => {
         </NavbarBs.Brand>
         <Nav className="me-auto">
           <Nav.Link as={Link} to="/">Home</Nav.Link>
-          <Nav.Link as={Link} to="/contactus">Contact Us</Nav.Link>
+          <Nav.Link as={Link} to="/Contactus">Contact Us</Nav.Link>
           <Nav.Link as={Link} to="/about">About</Nav.Link>
           <Nav.Link as={Link} to="/register">Register</Nav.Link>
           <Nav.Link as={Link} to="/Doctors/:Speciality">All Doctors</Nav.Link>

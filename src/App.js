@@ -15,7 +15,7 @@ import Appointment from './Pages/Appointment';
 import Footer from './components/Footer';
 import { AppContextProvider } from "./Context/AppContext";
 import Payment from"./Pages/Payment";
-import Contactus from './Pages/Contact us';
+import Contactus from'./Pages/Contactus';
 
 const App= () => {
 
