@@ -1,4 +1,4 @@
-import React, { useContext, useEffect, useState } from "react";
+import React, { useContext, useEffect, useState,useCallback } from "react";
 import {  useNavigate, useParams } from "react-router-dom";
 import { AppContext } from "../Context/AppContext";
 import { assets } from "../assets/assets";
@@ -10,57 +10,68 @@ const Appointment = () => {
   const [docSlots, setDocSlots] = useState([]);
   const [slotIndex, setSlotIndex] = useState(0);
   const [slotTime, setSlotTime] = useState(null);
-  const [loading, setLoading] = useState(true);
+
 const navigate=useNavigate();
   const daysOfWeek = ["SUN", "MON", "TUE", "WED", "THU", "FRI", "SAT"];
 
-  const fetchDataInfo = async () => {
-    const docInfo = Doctors.find((doc) => doc.docid === docid);
-    setDocInfo(docInfo);
-    console.log(docInfo);
-  };
 
-  const getAvailableSlots = async () => {
-    const slots = [];
-    const today = new Date();
+  const fetchDataInfo = useCallback(() => {
+  const foundDoc = Doctors.find((doc) => doc.docid === docid);
+setDocInfo(foundDoc);
+}, [Doctors, docid]);
 
-    for (let i = 0; i < 7; i++) {
-      const currentDate = new Date(today);
-      currentDate.setDate(today.getDate() + i);
+  const getAvailableSlots = useCallback(() => {
+  const slots = [];
+  const today = new Date();
 
-      const endTime = new Date(currentDate);
-      endTime.setHours(21, 0, 0, 0);
+  for (let i = 0; i < 7; i++) {
+    const currentDate = new Date(today);
+    currentDate.setDate(today.getDate() + i);
 
-      if (today.getDate() === currentDate.getDate()) {
-        currentDate.setHours(currentDate.getHours() > 10 ? currentDate.getHours() + 1 : 10);
-        currentDate.setMinutes(currentDate.getMinutes() > 30 ? 30 : 0);
-      } else {
-        currentDate.setHours(10, 0, 0, 0);
-      }
+    const endTime = new Date(currentDate);
+    endTime.setHours(21, 0, 0, 0);
 
-      const timeSlots = [];
-      while (currentDate < endTime) {
-        const formattedTime = currentDate.toLocaleTimeString([], { hour: "2-digit", minute: "2-digit" });
-        timeSlots.push({
-          datetime: new Date(currentDate),
-          time: formattedTime,
-        });
-        currentDate.setMinutes(currentDate.getMinutes() + 30);
-      }
-      slots.push(timeSlots);
+    if (today.getDate() === currentDate.getDate()) {
+      currentDate.setHours(
+        currentDate.getHours() > 10 ? currentDate.getHours() + 1 : 10
+      );
+      currentDate.setMinutes(currentDate.getMinutes() > 30 ? 30 : 0);
+    } else {
+      currentDate.setHours(10, 0, 0, 0);
     }
-    setDocSlots(slots);
-  };
-  useEffect(() => {
-    fetchDataInfo()
-  },[Doctors,docid])
-useEffect (() => {
-  getAvailableSlots()
-},[docInfo])
 
-  useEffect(() => {
-    if (docInfo) getAvailableSlots();
-  }, [docInfo]);
+    const timeSlots = [];
+    while (currentDate < endTime) {
+      const formattedTime = currentDate.toLocaleTimeString([], {
+        hour: "2-digit",
+        minute: "2-digit",
+      });
+
+      timeSlots.push({
+        datetime: new Date(currentDate),
+        time: formattedTime,
+      });
+
+      currentDate.setMinutes(currentDate.getMinutes() + 30);
+    }
+
+    slots.push(timeSlots);
+  }
+
+  setDocSlots(slots);
+}, []);
+
+
+
+ useEffect(() => {
+  fetchDataInfo();
+}, [fetchDataInfo]);;
+
+useEffect(() => {
+  if (docInfo) {
+    getAvailableSlots();
+  }
+}, [docInfo, getAvailableSlots]);
 
   return (
     docInfo && (
@@ -129,7 +140,7 @@ useEffect (() => {
           <button className="mt-4 px-6 py-2 bg-primary text-white rounded-lg" onClick={() => navigate(`/payment/${docid}`)}
 >
   Book an Appointment</button>
-  
+
         </div>
         {}
         <RelatedDoctors docid={docid}  Speciality={docInfo .Speciality}/>
