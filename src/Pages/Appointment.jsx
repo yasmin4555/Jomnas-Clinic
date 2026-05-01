@@ -17,6 +17,7 @@ const navigate=useNavigate();
 
   const fetchDataInfo = useCallback(() => {
   const foundDoc = Doctors.find((doc) => doc.docid === docid);
+
 setDocInfo(foundDoc);
 }, [Doctors, docid]);
 
@@ -143,7 +144,7 @@ useEffect(() => {
 
         </div>
         {}
-        <RelatedDoctors docid={docid}  Speciality={docInfo .Speciality}/>
+        <RelatedDoctors docid={docid}  Speciality={docInfo.Speciality}/>
       </div>
     )
   );
